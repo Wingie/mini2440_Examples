@@ -1,0 +1,29 @@
+A collection of applications that were developed on the mini2440 embedded development board.
+
+some of them are dummy projects so here is a list of the prominent project folder.
+These projects are part of a linux pengutronix BSP on the mini2440.
+they go into the local_src folder and can be included in ptxdist menuconfig directly.
+contact wingston.sharon@gmail.com for any queries.
+
+The SDL projects require SDL to be installed on the mini2440 as well as the include folders linked to from the build directory.
+A list of these projects in no patricular order.
+
+Cube : This project depicts a spinning 3D code on the mini2440 screen using SDL for rendering framebuffer graphics.
+ledniru : This project opens the mini2440s onboard LEDs via a file writing protocol and writes a character to that file. When running this file if you give it the command line arguments as 1 or 0, you can switch on/off the first LED.
+snow: This program is another example of the SDL framework and gives a cute animation of snow fallling slowly down from the screen.
+slave: This is the C part of a webserver implementation that uses boa to control the mini2440's LEDs over the network.
+ceme: this is a small C server socket server implementation.(only request handling)
+tst: This is a sample kernel module that uses ioctl communications to set the mini2440's LEDs on/off.
+ledtst: This is the accompanying userspace progam for the above kernel module that communicates to the module via ioctl calls.
+sertest: This is a reimplementation of a serial protocol that works better in getting the mini2440 and and Arduino communicating.
+setQT: This is a qt example that shows how to control the arduino's onboard LED from a GUI display on the mini2440. basic serial mode communication.
+pwmtest: A test of the pwm buzzer on the mini2440
+mysdl: a test application for setting up SDL and getting it to work on the mini2440.
+myQTapp: a complete example testing qt application of a lot of the mini2440's functionality: ADC, timers, GUI componets etc..
+myfirst: An application that tests the onboard keys on the mini2440 hardware.
+ledswitch: This is a non blocking UI example that switches on LEDs as the mini2440 hardware buttons are pressed. 1st button toggles, 2nd button is press and hold and 3rd makes pretty blinking lights.
+balaqt: this a TicTacToe program on the mini2440's LCD
+
+
+
+

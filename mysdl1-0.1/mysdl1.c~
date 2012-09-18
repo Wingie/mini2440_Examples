@@ -1,0 +1,46 @@
+#include <stdlib.h>
+#include "SDL/SDL.h"
+#include "graphics.h"
+#include <math.h>
+
+SDL_Surface *screen;
+void render()
+{
+
+  if (SDL_MUSTLOCK(screen))
+    if (SDL_LockSurface(screen) < 0)
+      return;
+     
+	for(int i=0;i<MX;i++)
+	      putpixel(i,MY/2,0xFFFFFF);
+
+  if (SDL_MUSTLOCK(screen))
+    SDL_UnlockSurface(screen);
+  // Tell SDL to update the whole screen
+  SDL_Flip(screen);
+}
+
+int main(int argc, char *argv[])
+{
+  init();
+  
+  while (1)
+  {
+    render();
+    
+    SDL_Event event;
+    while (SDL_PollEvent(&event))
+    {
+
+      switch (event.type)
+      {
+      case SDL_QUIT:
+        return(0);
+      }
+    }
+  }
+  return 0;
+}
+
+
+

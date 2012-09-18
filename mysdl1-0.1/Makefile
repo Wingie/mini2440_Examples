@@ -1,0 +1,27 @@
+#
+# Simple development makefile
+#
+
+#
+# add more flags here,
+# but don't remove the "+="
+#
+PREFIX := /usr
+CFLAGS += -O2 -g -Wall #-Wsign-compare -Wfloat-equal -Wformat-security #-Werror
+CPPFLAGS +=
+LDFLAGS +=
+LDLIBS += -lSDLmain -lSDL -lSDL_gfx -lSDL_image
+
+all: mysdl1
+
+mysdl1: mysdl1.cpp
+
+clean:
+	-rm -f mysdl1
+
+install: mysdl1
+	cp mysdl1 $(DESTDIR)$(PREFIX)/bin/mysdl1
+
+.PHONY: all install clean
+
+# end of development makefile

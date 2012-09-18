@@ -1,0 +1,46 @@
+#include <stdint.h>
+#include <linux/input.h>
+#include <string.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <stdio.h>
+#include "keys.h"
+
+#ifndef EV_SYN
+#define EV_SYN 0
+#endif
+
+
+int main (int argc, char **argv)
+{
+	int fd, rd, i;
+	struct input_event ev[64];
+
+	if ((fd = open("/dev/input/buttons", O_RDONLY)) < 0) {
+		perror("cannot open them damn buttons.. :'(");
+		return 1;
+	}
+
+
+	while (1) {
+		rd = read(fd, ev, sizeof(struct input_event) * 64);
+
+		if (rd < (int) sizeof(struct input_event)) {
+			printf("ERROR!!!!!\n");
+			perror("\nerror reading event pa.");
+			return 1;
+		}
+
+		for (i = 0; i < rd / sizeof(struct input_event); i++)
+			if(ev[i].type == 1)			
+			{
+				printf("Event:  code %d (%s), value %d\n",
+					ev[i].code,
+					names[ev[i].type][ev[i].code],
+					ev[i].value);
+			}	
+
+	}
+}
+
+

@@ -1,0 +1,22 @@
+
+
+#define _XOPEN_SOURCE 500	/* for usleep() */
+
+#include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <unistd.h>
+
+#include <linux/version.h>
+#include <linux/input.h>
+
+int main(int argc, char **argv)
+{
+	int h = fopen("/sys/class/leds/led1/brightness", "w");
+	fprintf(h, "1\n");
+	fclose(h);
+}
+

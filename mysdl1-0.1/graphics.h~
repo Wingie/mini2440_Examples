@@ -1,0 +1,60 @@
+
+
+#define COLOR 0xFF00FF     
+#define PITCH (screen->pitch / 4)
+#include <math.h>
+
+/***
+    MX and MY changed here will change the size of the screen.
+    the SDL_rect code is to manage clipping: do not change
+    the extern SDL_surface *screen is the same global variable in main
+***/
+#define MX 240
+#define MY 320
+const SDL_Rect rect = {0,0,MX,MY};
+extern SDL_Surface *screen;
+
+
+void putpixel(int x,int y, int color)
+{
+  unsigned int *ptr = (unsigned int*)screen->pixels;
+  int lineoffset = y * (screen->pitch / 4);
+  ptr[lineoffset + x] = color;
+}
+
+/***
+    This funciton must be called when SDL exits.
+    so this function is registered in init() by an atexit()
+***/
+void shutdown()
+{
+    SDL_FreeSurface(screen);
+    SDL_Quit();
+}
+
+void init()
+{
+
+   
+  if ( SDL_Init(SDL_INIT_VIDEO|SDL_INIT_TIMER) < 0 )
+  {
+    fprintf(stderr, "Unable to init SDL: %s\n", SDL_GetError());
+    exit(1);
+  }
+
+ 
+  atexit(shutdown);
+
+  screen = SDL_SetVideoMode(MX, MY, 32, SDL_HWSURFACE|SDL_FULLSCREEN);
+
+  if ( screen == NULL )
+  {
+    fprintf(stderr, "Unable to set video: %s\n", SDL_GetError());
+    exit(1);
+  }
+
+    SDL_WM_SetCaption("Workshop India!", 0);
+
+    //SDL_SetClipRect(screen,&rect);
+}
+
